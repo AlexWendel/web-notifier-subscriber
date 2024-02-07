@@ -1,0 +1,38 @@
+<html>
+  <head>
+    <title>Push demo</title>
+    <script src="register.js"></script>
+  </head>
+  <body>
+    <h1>Push notification Demo</h1>
+  </body>
+</html>
+
+</li>
+<br/>
+<br/>
+<li>The ServiceWorker debug screen in Chrome lets us see all the registered service workers in the browser. You can see the newly registered service worker at the top of this list: <img src="/content/images/2016/03/service-worker-chrome.png"> 
+We can simulate the push event from the browser by clicking the "Push" button. The push event is published and the handler we registered in our service worker is invoked. So far, so good:
+<br/>
+<br/>
+<img src="/content/images/2016/03/push-pop.png"> </li>
+<br/><br/>
+<li>We need to setup an account with Google Developer Console and enable the Messaging API (GCM – google cloud messaging). Follow this procedure to do this: https://developers.google.com/web/fundamentals/getting-started/push-notifications/step-04?hl=en. 
+<ol>
+<li>You need to make a note of the project number, as this goes into the manifest file as the value of the property <code>gcm_sender_id</code></li>
+<li>Make a note of the API key, as this is used to send messages to GCM, so that GCM can verify that you have access to send messages to the registered endpoints.</li></ol>
+</li>
+<li>Add a manifest.json file to the project. This file needs to include the <code>gcm_sender_id</code> from step 5.:
+```javascript
+{
+  "name": "Push Demo",
+  "short_name": "Push Demo",
+  "icons": [{
+        "src": "images/hipstercat.jpg",
+        "sizes": "225x225",
+        "type": "image/jpg"
+      }],
+  "start_url": "./index.html",
+  "display": "standalone",
+  "gcm_sender_id": "<your project number goes here>"
+}
